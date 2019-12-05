@@ -1,13 +1,13 @@
 {
   "name": "graphql-relay-mongodb-pagination",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Apollo Server 2, MongoDB Relay pagination example",
+  "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node ./src/index.js"
+    "start": "nodemon -exec babel-node ./src/index.js"
   },
-  "author": "Reindex Software",
+  "author": "Reindex Software, Jono Wells",
   "license": "MIT",
   "dependencies": {
     "base64-url": "^1.3.2",
@@ -23,6 +23,7 @@
     "@babel/preset-env": "^7.7.4",
     "babel-eslint": "^6.1.2",
     "eslint": "^3.1.1",
-    "eslint-plugin-babel": "^3.3.0"
+    "eslint-plugin-babel": "^3.3.0",
+    "nodemon": "^2.0.1"
   }
 }
