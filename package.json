@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node ./src/server.js",
-    "lint": "eslint . && prettier -l **/*"
+    "lint": "eslint . && prettier -l **/*",
+    "load:mongo": "babel-node ./scripts/loadTestDataMongo.js"
   },
   "author": "Reindex Software, Jono Wells",
   "license": "MIT",
@@ -22,6 +23,7 @@
     "@babel/node": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "babel-eslint": "^10.0.3",
+    "casual": "^1.6.2",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-babel": "^3.3.0",
