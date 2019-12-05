@@ -11,6 +11,18 @@ type Article {
   The text of an article.
   """
   text: String!
+
+  """
+  Identifies the date and time when the object was created.
+  """
+  createdAt: DateTime!
+
+  """
+  Identifies the date and time when the object was last updated.
+  This value is the same as `createdAt` if the item has not yet
+  been updated since it was created.
+  """
+  updatedAt: DateTime!
 }
 
 """
@@ -47,6 +59,11 @@ type ArticleEdge {
 Contains base64 encoded cursor information.
 """
 scalar Cursor
+
+"""
+An ISO-8601 encoded UTC date string.
+"""
+scalar DateTime
 
 """
 Information about pagination in a connection.

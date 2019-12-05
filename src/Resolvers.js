@@ -1,5 +1,6 @@
 import { getArticles } from './Article';
 import GraphQLCursorType from './Cursor';
+import GraphQLDateTimeType from './DateTime';
 
 const Query = {
   viewer: () => ({ id: 'VIEWER_ID' }),
@@ -25,6 +26,8 @@ const Type = {
   },
 
   Cursor: GraphQLCursorType,
+
+  DateTime: GraphQLDateTimeType,
 };
 
 export default {
