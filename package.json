@@ -2,10 +2,10 @@
   "name": "graphql-relay-mongodb-pagination",
   "version": "1.0.0",
   "description": "Apollo Server 2, MongoDB Relay pagination example",
-  "main": "./src/index.js",
+  "main": "./src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node ./src/index.js",
+    "start": "nodemon --exec babel-node ./src/server.js",
     "lint": "eslint . && prettier -l **/*"
   },
   "author": "Reindex Software, Jono Wells",
