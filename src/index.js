@@ -8,12 +8,15 @@ const mongodb = MongoClient.connect(
   'mongodb://localhost:27017/relaypagination'
 );
 
-app.use('/graphql', graphqlHTTP(async () => ({
-  schema: Schema,
-  graphiql: true,
-  context: {
-    mongodb: await mongodb,
-  },
-})));
+app.use(
+  '/graphql',
+  graphqlHTTP(async () => ({
+    schema: Schema,
+    graphiql: true,
+    context: {
+      mongodb: await mongodb,
+    },
+  }))
+);
 
 app.listen(3000);
