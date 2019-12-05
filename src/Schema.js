@@ -108,7 +108,7 @@ const Viewer = new GraphQLObjectType({
 
 const Schema = new GraphQLSchema({
   query: new GraphQLObjectType({
-    name: 'RootQueryType',
+    name: 'Query',
     fields: {
       viewer: {
         type: Viewer,
