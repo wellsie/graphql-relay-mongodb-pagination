@@ -1,22 +1,15 @@
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
-import { MongoClient } from 'mongodb';
-import Schema from './Schema';
+import fs from 'fs';
+import { ApolloServer, gql } from 'apollo-server';
 
-const app = express();
-const mongodb = MongoClient.connect(
-  'mongodb://localhost:27017/relaypagination'
-);
+const typeDefs = gql`
+  ${fs.readFileSync(__dirname.concat('/../schema.graphql'), 'utf8')}
+`;
 
-app.use(
-  '/graphql',
-  graphqlHTTP(async () => ({
-    schema: Schema,
-    graphiql: true,
-    context: {
-      mongodb: await mongodb,
-    },
-  }))
-);
+const server = new ApolloServer({
+  typeDefs,
+  mocks: true,
+});
 
-app.listen(3000);
+server.listen(4001).then(url => {
+  console.log(`🚀 Server ready at ${url.url}`);
+});
