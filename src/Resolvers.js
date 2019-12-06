@@ -1,10 +1,10 @@
-import { getArticles } from './Article';
+import { getItems } from './Items';
 import GraphQLCursorType from './Cursor';
 import GraphQLDateTimeType from './DateTime';
 
 const Query = {
   articles: (parent, args, { mongodb }) =>
-    getArticles(mongodb, args, 'text', -1),
+    getItems(mongodb, 'Articles', args, 'text', -1),
 
   viewer: () => ({ id: 'VIEWER_ID' }),
 };

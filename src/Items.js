@@ -1,12 +1,13 @@
 import { ObjectId } from 'mongodb';
 
-export async function getArticles(
+export async function getItems(
   mongodb,
+  collection,
   { first, last, before, after },
   orderField,
   order
 ) {
-  let query = mongodb.collection('Articles');
+  let query = mongodb.collection(collection);
   if (orderField === 'id') {
     query = limitQueryWithId(query, before, after, order);
   } else {
