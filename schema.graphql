@@ -47,12 +47,12 @@ type ArticleEdge {
   """
   A cursor for use in pagination.
   """
-  cursor: Cursor
+  cursor: Cursor!
 
   """
   The item at the end of an edge.
   """
-  node: Article
+  node: Article!
 }
 
 """
@@ -85,24 +85,9 @@ The query root of this demos GraphQL interface.
 """
 type Query {
   """
-  Lookup current viewer.
-  """
-  viewer: Viewer
-}
-
-"""
-A viewer.
-"""
-type Viewer {
-  """
-  A unique identifier for the viewer.
-  """
-  id: ID!
-
-  """
   A list of all articles.
   """
-  allArticles(
+  articles(
     """
     Returns the first _n_ elements from the list.
     """
@@ -123,4 +108,18 @@ type Viewer {
     """
     after: Cursor
   ): ArticleConnection
+  """
+  Lookup current viewer.
+  """
+  viewer: Viewer
+}
+
+"""
+A viewer.
+"""
+type Viewer {
+  """
+  A unique identifier for the viewer.
+  """
+  id: ID!
 }
