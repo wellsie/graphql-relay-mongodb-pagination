@@ -16,6 +16,7 @@ const Type = {
 
   ArticleConnection: {
     edges: parent => parent.items,
+    nodes: parent => parent.items,
   },
 
   ArticleEdge: {
@@ -27,7 +28,8 @@ const Type = {
 
   DateTime: GraphQLDateTimeType,
 
-  // suppress warning, see https://github.com/apollographql/apollo-server/issues/1075
+  // suppress warning,
+  // see https://github.com/apollographql/apollo-server/issues/1075
   //
   Node: {
     __resolveType() {

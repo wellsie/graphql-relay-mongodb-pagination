@@ -35,6 +35,11 @@ type ArticleConnection {
   edges: [ArticleEdge]
 
   """
+  A list of nodes.
+  """
+  nodes: [Article]
+
+  """
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
