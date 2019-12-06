@@ -15,6 +15,8 @@ query GetArticles($last: Int!){
     pageInfo {
       hasNextPage
       hasPreviousPage
+      startCursor
+      endCursor
     }
   }
 }

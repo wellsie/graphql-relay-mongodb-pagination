@@ -15,7 +15,7 @@ const Type = {
   },
 
   ArticleConnection: {
-    edges: parent => parent.query.toArray(),
+    edges: parent => parent.items,
   },
 
   ArticleEdge: {

@@ -8,14 +8,33 @@ export async function getItems(
   order
 ) {
   let query = mongodb.collection(collection);
+
   if (orderField === 'id') {
     query = limitQueryWithId(query, before, after, order);
   } else {
     query = await limitQuery(query, orderField, order, before, after);
   }
-  const pageInfo = await applyPagination(query, first, last);
+
+  let pageInfo = await applyPagination(query, first, last);
+
+  const items = await query.toArray();
+
+  let startCursor;
+  let endCursor;
+
+  if (items.length > 0) {
+    startCursor = items[0]._id;
+    endCursor = items[items.length - 1]._id;
+  }
+
+  pageInfo = {
+    ...pageInfo,
+    startCursor,
+    endCursor,
+  };
+
   return {
-    query,
+    items,
     pageInfo,
   };
 }
