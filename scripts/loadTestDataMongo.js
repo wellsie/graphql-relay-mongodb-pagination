@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb';
 
 let mongodb;
 
-const load = async () => {
+const main = async () => {
   mongodb = await MongoClient.connect(
     'mongodb://localhost:27017/relaypagination'
   );
@@ -19,11 +19,12 @@ const load = async () => {
     });
   }
 
-  return mongodb.collection('Articles').insertMany(items);
+  await mongodb.collection('Articles').insertMany(items);
 };
 
-load().then(() => {
-  console.log('🚀 done');
-  mongodb.close();
-  process.exit(0);
-});
+main()
+  .then(() => {
+    console.log('🚀 done');
+    mongodb.close();
+  })
+  .catch(error => console.error(error));
