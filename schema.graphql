@@ -1,7 +1,7 @@
 """
 An article contains information for an article.
 """
-type Article {
+type Article implements Node {
   """
   A unique identifier for an article.
   """
@@ -64,6 +64,16 @@ scalar Cursor
 An ISO-8601 encoded UTC date string.
 """
 scalar DateTime
+
+"""
+An object with an ID.
+"""
+interface Node {
+  """
+  ID of the object.
+  """
+  id: ID!
+}
 
 """
 Information about pagination in a connection.
