@@ -26,6 +26,14 @@ const Type = {
   Cursor: GraphQLCursorType,
 
   DateTime: GraphQLDateTimeType,
+
+  // suppress warning, see https://github.com/apollographql/apollo-server/issues/1075
+  //
+  Node: {
+    __resolveType() {
+      return null;
+    },
+  },
 };
 
 export default {
