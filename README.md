@@ -3,7 +3,7 @@
 Example of [Relay Cursor Connections](https://facebook.github.io/relay/graphql/connections.htm)
 with [MongoDB](https://www.mongodb.com/) and
 [Apollo Server 2](https://www.apollographql.com/docs/apollo-server/).
-Forked from [reindexio/graphql-relay-mongodb-pagination](https://github.com/reindexio/graphql-relay-mongodb-pagination)
+Ported from [reindexio/graphql-relay-mongodb-pagination](https://github.com/reindexio/graphql-relay-mongodb-pagination)
 that provided the code accompnaying the article
 [Relay-compatible GraphQL pagination with MongoDB](https://www.reindex.io/blog/relay-graphql-pagination-with-mongodb/).
 
