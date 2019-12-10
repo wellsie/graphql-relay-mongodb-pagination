@@ -191,6 +191,7 @@ type Query {
     """
     after: Cursor
   ): ArticleConnection
+
   """
   Lookup current viewer.
   """

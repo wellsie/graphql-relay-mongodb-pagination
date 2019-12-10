@@ -1,12 +1,18 @@
 import casual from 'casual';
 import { MongoClient } from 'mongodb';
 
-let mongodb;
+const mongodbUri = 'mongodb://localhost:27017';
+const mongodbName = 'relaypagination';
+
+let mongodbClient;
 
 const main = async () => {
-  mongodb = await MongoClient.connect(
-    'mongodb://localhost:27017/relaypagination'
-  );
+  mongodbClient = await MongoClient.connect(mongodbUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  const mongodb = mongodbClient.db(mongodbName);
 
   const items = [];
 
@@ -25,6 +31,6 @@ const main = async () => {
 main()
   .then(() => {
     console.log('🚀 done');
-    mongodb.close();
+    mongodbClient.close();
   })
   .catch(error => console.error(error));
