@@ -78,3 +78,49 @@ query Last {
   }
 }
 ```
+
+## Mutations
+
+This repository contains an example of calling a mutation with the [graphql-request](https://github.com/prisma-labs/graphql-request)
+to load sample data:
+
+- [scripts/loadTestDataApolloClient.js](scripts/loadTestDataApolloClient.js)
+
+You can run this script with the following command:
+
+```bash
+yarn load:apollo-client
+```
+
+Here is an example of using `graphql-request` to add a single article.
+
+```javascript
+import { request } from 'graphql-request';
+
+const endpoint = 'http://localhost:4001/graphql';
+
+const query = `
+mutation AddArticle($article:AddArticleInput!) {
+  addArticle(input:$article){
+    article{
+      id
+      text
+      createdAt
+      updatedAt
+    }
+  }
+}
+`;
+
+const variables = {
+  article: {
+    text: 'graphql-request mutation',
+  },
+};
+
+// using request
+//
+request(endpoint, query, variables)
+  .then(data => console.log(JSON.stringify(data, undefined, 2)))
+  .catch(error => console.error(error));
+```

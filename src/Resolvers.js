@@ -1,6 +1,13 @@
 import { getItems } from './Items';
 import GraphQLCursorType from './Cursor';
 import GraphQLDateTimeType from './DateTime';
+import { addArticle } from './Article';
+
+const Mutation = {
+  addArticle: async (_, { input }, { mongodb }) => ({
+    article: addArticle(mongodb, input),
+  }),
+};
 
 const Query = {
   articles: (parent, args, { mongodb }) =>
@@ -39,6 +46,7 @@ const Type = {
 };
 
 export default {
+  Mutation,
   Query,
   ...Type,
 };

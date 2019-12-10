@@ -8,6 +8,7 @@
     "start": "nodemon --exec babel-node ./src/server.js",
     "lint": "eslint . && prettier -l **/*",
     "load:mongo": "babel-node ./scripts/loadTestDataMongo.js",
+    "load:apollo-client": "babel-node ./scripts/loadTestDataApolloClient.js",
     "client:graphql-request": "babel-node ./scripts/clients/graphql-request.js",
     "client:apollo-client": "babel-node ./scripts/clients/apollo-client.js"
   },

@@ -1,4 +1,24 @@
 """
+Input type of AddArticle.
+"""
+input AddArticleInput {
+  """
+  The text of an article.
+  """
+  text: String!
+}
+
+"""
+Return type of AddArticle.
+"""
+type AddArticlePayload {
+  """
+  The newly created Article.
+  """
+  article: Article
+}
+
+"""
 An article contains information for an article.
 """
 type Article implements Node {
@@ -69,6 +89,16 @@ scalar Cursor
 An ISO-8601 encoded UTC date string.
 """
 scalar DateTime
+
+"""
+The root query for implementing GraphQL mutations.
+"""
+type Mutation {
+  """
+  Adds an Article.
+  """
+  addArticle(input: AddArticleInput!): AddArticlePayload!
+}
 
 """
 An object with an ID.
