@@ -91,6 +91,24 @@ An ISO-8601 encoded UTC date string.
 scalar DateTime
 
 """
+Return type for uploaded file
+"""
+type File {
+  """
+  The file name of an uploaded file.
+  """
+  filename: String!
+  """
+  The mime type of an uploaded file.
+  """
+  mimetype: String!
+  """
+  The encoding of an uploaded file.
+  """
+  encoding: String!
+}
+
+"""
 The root query for implementing GraphQL mutations.
 """
 type Mutation {
@@ -98,6 +116,16 @@ type Mutation {
   Adds an Article.
   """
   addArticle(input: AddArticleInput!): AddArticlePayload!
+
+  """
+  Upload one file.
+  """
+  singleUpload(file: Upload!): File!
+
+  """
+  Upload multiple files.
+  """
+  multipleUpload(files: [Upload!]!): [File!]!
 }
 
 """

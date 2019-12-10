@@ -1,12 +1,18 @@
-import { getItems } from './Items';
 import GraphQLCursorType from './Cursor';
 import GraphQLDateTimeType from './DateTime';
 import { addArticle } from './Article';
+import { getItems } from './Items';
+import { storeUpload } from './upload';
 
 const Mutation = {
   addArticle: async (_, { input }, { mongodb }) => ({
     article: addArticle(mongodb, input),
   }),
+
+  singleUpload: (_, { file }) => storeUpload(file),
+
+  multipleUpload: async (_, { files }) =>
+    await Promise.all(files.map(storeUpload)),
 };
 
 const Query = {

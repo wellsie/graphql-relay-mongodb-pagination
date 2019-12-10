@@ -124,3 +124,53 @@ request(endpoint, query, variables)
   .then(data => console.log(JSON.stringify(data, undefined, 2)))
   .catch(error => console.error(error));
 ```
+
+## Uploads
+
+There are two mutations in the GraphQL schema that perform file uploads,
+`singleUpload` and `multipleUpload`. The following scripts can be used
+to test `singleUpload` and `multipleUpload` respectively:
+
+- `scripts/singleUpload.sh`
+- `scripts/multipleUpload.sh`
+
+```bash
+$ scripts/singleUpload.sh | jq
+{
+  "data": {
+    "singleUpload": {
+      "filename": "yarn.lock",
+      "mimetype": "application/octet-stream",
+      "encoding": "7bit"
+    }
+  }
+}
+```
+
+```bash
+$ scripts/multipleUpload.sh | jq
+{
+  "data": {
+    "multipleUpload": [
+      {
+        "filename": "package.json",
+        "mimetype": "application/octet-stream",
+        "encoding": "7bit"
+      },
+      {
+        "filename": "nodemon.json",
+        "mimetype": "application/octet-stream",
+        "encoding": "7bit"
+      }
+    ]
+  }
+}
+```
+
+## References
+
+- [Relay-compatible GraphQL pagination with MongoDB](https://www.reindex.io/blog/relay-graphql-pagination-with-mongodb/)
+- [Apollo Server 2](https://www.apollographql.com/docs/apollo-server/)
+- [jaydenseric/apollo-upload-examples](https://github.com/jaydenseric/apollo-upload-examples)
+- [jaydenseric/graphql-upload](https://github.com/jaydenseric/graphql-upload)
+- [Relay Cursor Connections](https://facebook.github.io/relay/graphql/connections.htm)
