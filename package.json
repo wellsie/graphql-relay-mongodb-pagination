@@ -14,7 +14,7 @@
   },
   "author": "Reindex Software, Jono Wells",
   "engines": {
-    "node": "<=12.13.1"
+    "node": ">=13.3.0"
   },
   "license": "MIT",
   "dependencies": {
@@ -39,5 +39,8 @@
     "graphql-request": "^1.8.2",
     "nodemon": "^2.0.1",
     "prettier": "1.19.1"
+  },
+  "resolutions": {
+    "graphql-upload": "^9.0.0"
   }
 }
