@@ -24,6 +24,10 @@ const start = async () => {
     context: async () => ({
       mongodb: await mongodb,
     }),
+    uploads: {
+      maxFileSize: 10000000,
+      maxFiles: 10,
+    },
   });
 
   server.listen(4001).then(({ url }) => {
