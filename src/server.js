@@ -1,9 +1,12 @@
 import fs from 'fs';
 import { ApolloServer, gql } from 'apollo-server';
+import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 import resolvers from './Resolvers';
 
-const mongodbUri = 'mongodb://localhost:27017';
+dotenv.config();
+
+const mongodbUri = process.env.MONGODB_URI;
 const mongodbName = 'relaypagination';
 
 const start = async () => {
@@ -21,6 +24,7 @@ const start = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,
     context: async () => ({
       mongodb: await mongodb,
     }),

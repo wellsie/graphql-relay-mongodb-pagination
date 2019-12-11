@@ -21,7 +21,7 @@ yarn install
 Start MongoDB (if required):
 
 ```bash
-docker-compose up
+docker-compose up mongodb
 ```
 
 Load sample data directly into MongoDB:
@@ -37,6 +37,12 @@ Install [MongoDB Compass](https://www.mongodb.com/products/compass):
 
 ```bash
 brew cask install mongodb-compass
+```
+
+Start the server:
+
+```bash
+yarn start:dev
 ```
 
 ![image](https://user-images.githubusercontent.com/5160593/70457488-1b48db00-1a65-11ea-887d-7db4cd306f24.png)
@@ -167,10 +173,41 @@ $ scripts/multipleUpload.sh | jq
 }
 ```
 
+## docker
+
+The `docker-compose.yaml` file will by default build and use a container
+for the Node.js app. This can be time consuming during development.
+Running `docker-compose up mongodb` will just start a MongoDB container
+that can be used with `yarn start:dev` during development.
+
+To start the Node.js app and MongoDB together do:
+
+```bash
+docker-compose up --build
+```
+
+It is important to include `--build` if there have been changes to the
+source code.
+
+The Node.js app is available on [localhost:4002](http://localhost:4002)
+when running via `docker-compose`. Note that the playground is not available
+as the environment is set as production. Use
+[GraphQL Playground](https://github.com/prisma-labs/graphql-playground)
+to interact with GraphQL in this case.
+
+### Node.js and Docker
+
+Node.js doesn't like running as pid 1. Use `--init` with `docker run`
+or [Tini](https://github.com/krallin/tini) if your containers are headed
+for [Kubernetes](https://kubernetes.io/), since the `--init` flag isn't supported there.
+
 ## References
 
 - [Relay-compatible GraphQL pagination with MongoDB](https://www.reindex.io/blog/relay-graphql-pagination-with-mongodb/)
 - [Apollo Server 2](https://www.apollographql.com/docs/apollo-server/)
+- [Avoid running NodeJS as PID 1 under Docker images](https://www.elastic.io/nodejs-as-pid-1-under-docker-images/)
+- [GraphQL Playground](https://github.com/prisma-labs/graphql-playground)
 - [jaydenseric/apollo-upload-examples](https://github.com/jaydenseric/apollo-upload-examples)
 - [jaydenseric/graphql-upload](https://github.com/jaydenseric/graphql-upload)
 - [Relay Cursor Connections](https://facebook.github.io/relay/graphql/connections.htm)
+- [Tini - A tiny but valid init for containers](https://github.com/krallin/tini)
