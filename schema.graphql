@@ -199,6 +199,16 @@ type Query {
 }
 
 """
+The root query for implementing GraphQL subscriptions.
+"""
+type Subscription {
+  """
+  Emits an Article object whenver a new article is added.
+  """
+  articleAdded: Article!
+}
+
+"""
 A viewer.
 """
 type Viewer {

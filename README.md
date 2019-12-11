@@ -173,6 +173,49 @@ $ scripts/multipleUpload.sh | jq
 }
 ```
 
+## Subscriptions
+
+Open two `GraphQL Playgroud` instances to `http://localhost:4001/graphql`.
+In the first instance enter this query and execute it:
+
+```graphql
+subscription Articles {
+  articleAdded {
+    id
+    text
+    createdAt
+    updatedAt
+  }
+}
+```
+
+In the second `GraphQL Playground` instance enter and execute this query:
+
+```graphql
+mutation AddArticle($article: AddArticleInput!) {
+  addArticle(input: $article) {
+    article {
+      id
+      text
+      createdAt
+      updatedAt
+    }
+  }
+}
+```
+
+With `query variables`:
+
+```json
+{
+  "article": {
+    "text": "hello there"
+  }
+}
+```
+
+![apollo2-subscriptions](https://user-images.githubusercontent.com/5160593/70639205-013b0400-1bef-11ea-8075-21926f1effbe.gif)
+
 ## docker
 
 The `docker-compose.yaml` file will by default build and use a container
