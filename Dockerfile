@@ -2,7 +2,6 @@ FROM node:13.3.0
 
 LABEL maintainer="jono <_@oj.io>"
 
-ARG TINI_URL=https://github.com/krallin/tini/releases/download
 ARG TINI_VERSION=v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /tini.asc
@@ -23,6 +22,6 @@ RUN yarn build
 
 EXPOSE 4001
 
-ENTRYPOINT ["/tini", "--"]
+ENTRYPOINT [ "/tini", "--" ]
 
 CMD [ "yarn", "start" ]
