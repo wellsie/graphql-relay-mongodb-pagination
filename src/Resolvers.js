@@ -1,18 +1,22 @@
-import { PubSub } from 'apollo-server';
+import dotenv from 'dotenv';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
 import GraphQLCursorType from './Cursor';
 import GraphQLDateTimeType from './DateTime';
 import { addArticle } from './Article';
 import { getItems } from './Items';
 import { storeUpload } from './upload';
 
-const ARTICLE_ADDED = 'ARTICLE_ADDED';
+const ARTICLE_ADDED_TOPIC = 'ARTICLE_ADDED';
 
-const pubsub = new PubSub();
+dotenv.config();
+const redisURI = process.env.REDIS_URI;
+
+const pubsub = new RedisPubSub({ connection: redisURI });
 
 const Mutation = {
   addArticle: async (_, { input }, { mongodb }) => {
-    const article = addArticle(mongodb, input);
-    pubsub.publish(ARTICLE_ADDED, { articleAdded: article });
+    const article = await addArticle(mongodb, input);
+    pubsub.publish(ARTICLE_ADDED_TOPIC, { articleAdded: article });
     return {
       article,
     };
@@ -26,7 +30,7 @@ const Mutation = {
 
 const Subscription = {
   articleAdded: {
-    subscribe: () => pubsub.asyncIterator([ARTICLE_ADDED]),
+    subscribe: () => pubsub.asyncIterator([ARTICLE_ADDED_TOPIC]),
   },
 };
 

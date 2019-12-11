@@ -32,6 +32,10 @@ const start = async () => {
       maxFileSize: 10000000,
       maxFiles: 10,
     },
+    subscriptions: {
+      onConnect: () => console.log('subscription: onConnect'),
+      onDisconnect: () => console.log('subscription: onDisconnect'),
+    },
   });
 
   server.listen(4001).then(({ url }) => {

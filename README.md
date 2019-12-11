@@ -10,6 +10,8 @@ that provided the code accompnaying the article
 The example has been enhanced so that the `ArticleConnection` objects
 also support a `nodes` object like [GitHub's GraphQL API](https://developer.github.com/v4/guides/forming-calls/) does.
 
+Also added are mutation and subscription with redis examples.
+
 ## Running the example
 
 Install npm dependencies:
@@ -18,10 +20,10 @@ Install npm dependencies:
 yarn install
 ```
 
-Start MongoDB (if required):
+Start MongoDB and redis (unless you have them running locally already):
 
 ```bash
-docker-compose up mongodb
+docker-compose up mongodb redis
 ```
 
 Load sample data directly into MongoDB:
@@ -175,8 +177,29 @@ $ scripts/multipleUpload.sh | jq
 
 ## Subscriptions
 
-Open two `GraphQL Playgroud` instances to `http://localhost:4001/graphql`.
-In the first instance enter this query and execute it:
+This project uses [redis](https://redis.io/) for subscriptions by utilizing the
+[davidyaha/graphql-redis-subscriptions](https://github.com/davidyaha/graphql-redis-subscriptions)
+[`PubSub` implementation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#pubsub-implementations).
+
+> Open two terminal windows and run `docker compose up --build` in one and
+> `yarn start:dev` in the other. This will result in two instances of the Node.js GraphQL server
+> running.
+
+```bash
+docker-compose up --build
+```
+
+```bash
+yarn start:dev
+```
+
+Now open two `GraphQL Playgroud IDE` instances. One to `http://localhost:4001/graphql` and
+the other to `http://localhost:4001/graphql`.
+
+> Note that the Node.js graphql app running on port `4002` (from `docker-compose`) does not support
+> `playground` since `NODE_ENV` is set to production. Thus the use of the `GraphQL Playground IDE` client.
+
+In the first `GraphQL Playground IDE` instance enter this query and execute it:
 
 ```graphql
 subscription Articles {
@@ -214,6 +237,18 @@ With `query variables`:
 }
 ```
 
+Montioring subscriptions with `redis-cli`:
+
+```bash
+$ redis-cli
+127.0.0.1:6379> monitor
+OK
+1576084903.219562 [0 172.27.0.1:45834] "unsubscribe" "ARTICLE_ADDED"
+1576084903.219608 [0 172.27.0.1:45834] "punsubscribe" "ARTICLE_ADDED"
+1576084905.559995 [0 172.27.0.1:45834] "subscribe" "ARTICLE_ADDED"
+1576084910.945354 [0 172.27.0.1:45830] "publish" "ARTICLE_ADDED" "{\"articleAdded\":{\"text\":\"hello there\",\"createdAt\":\"2019-12-11T17:21:50.919Z\",\"updatedAt\":\"2019-12-11T17:21:50.919Z\",\"_id\":\"5df125ae87f96d1c3a7d25bc\"}}"
+```
+
 ![apollo2-subscriptions](https://user-images.githubusercontent.com/5160593/70639205-013b0400-1bef-11ea-8075-21926f1effbe.gif)
 
 ## docker
@@ -242,16 +277,18 @@ to interact with GraphQL in this case.
 
 Node.js doesn't like running as pid 1. Use `--init` with `docker run`
 or [Tini](https://github.com/krallin/tini) if your containers are headed
-for [Kubernetes](https://kubernetes.io/), since the `--init` flag isn't supported there.
+to [Kubernetes](https://kubernetes.io/), since the `--init` flag isn't supported there.
 
 ## References
 
 - [Relay-compatible GraphQL pagination with MongoDB](https://www.reindex.io/blog/relay-graphql-pagination-with-mongodb/)
 - [Apollo Server 2](https://www.apollographql.com/docs/apollo-server/)
 - [Avoid running NodeJS as PID 1 under Docker images](https://www.elastic.io/nodejs-as-pid-1-under-docker-images/)
-- [GraphQL Playground](https://github.com/prisma-labs/graphql-playground)
+- [GraphQL Playground IDE](https://github.com/prisma-labs/graphql-playground)
 - [jaydenseric/apollo-upload-examples](https://github.com/jaydenseric/apollo-upload-examples)
 - [jaydenseric/graphql-upload](https://github.com/jaydenseric/graphql-upload)
+- [nowke/realtime-dashboard-demo](https://github.com/nowke/realtime-dashboard-demo)
+- [redis-cli, the Redis command line interface](https://redis.io/topics/rediscli)
 - [Relay Cursor Connections](https://facebook.github.io/relay/graphql/connections.htm)
 - [Tini - A tiny but valid init for containers](https://github.com/krallin/tini)
 - [What is advantage of Tini?](https://github.com/krallin/tini/issues/8#issuecomment-146135930)
