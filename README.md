@@ -211,3 +211,4 @@ for [Kubernetes](https://kubernetes.io/), since the `--init` flag isn't supporte
 - [jaydenseric/graphql-upload](https://github.com/jaydenseric/graphql-upload)
 - [Relay Cursor Connections](https://facebook.github.io/relay/graphql/connections.htm)
 - [Tini - A tiny but valid init for containers](https://github.com/krallin/tini)
+- [What is advantage of Tini?](https://github.com/krallin/tini/issues/8#issuecomment-146135930)
