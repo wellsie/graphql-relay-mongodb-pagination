@@ -23,4 +23,6 @@ RUN yarn build
 
 EXPOSE 4001
 
-CMD [ "/tini", "--", "yarn", "start" ]
+ENTRYPOINT ["/tini", "--"]
+
+CMD [ "yarn", "start" ]
