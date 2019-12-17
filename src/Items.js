@@ -134,6 +134,7 @@ async function applyPagination(query, first, last) {
         limit = limit - skip;
       } else if (!limit && count > last) {
         skip = count - last;
+        limit = count - skip;
       }
     }
 
