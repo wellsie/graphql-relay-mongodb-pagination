@@ -17,7 +17,7 @@
   },
   "author": "Reindex Software, Jono Wells",
   "engines": {
-    "node": ">=13.3.0"
+    "node": ">=13.5.0"
   },
   "license": "MIT",
   "dependencies": {
