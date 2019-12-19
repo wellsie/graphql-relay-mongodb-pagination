@@ -3,7 +3,7 @@ import { ApolloServer, gql, AuthenticationError } from 'apollo-server';
 import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 import resolvers from './Resolvers';
-import { getUser } from './User';
+import { getUserFromToken } from './User';
 
 dotenv.config();
 
@@ -29,12 +29,14 @@ const start = async () => {
     context: async context => {
       let user;
 
+      const db = await mongodb;
+
       // `req` not present on WebSocket connections
       //
       if (context.req) {
-        const authentication = context.req.headers.authentication;
+        const authorization = context.req.headers.authorization;
 
-        if (!authentication) {
+        if (!authorization) {
           // throw in `authentication` header is absent
           //
           throw new AuthenticationError(
@@ -42,12 +44,12 @@ const start = async () => {
           );
         }
 
-        user = getUser(authentication);
+        user = getUserFromToken(db, authorization);
       }
 
       return {
         ...context,
-        mongodb: await mongodb,
+        mongodb: db,
         user,
       };
     },

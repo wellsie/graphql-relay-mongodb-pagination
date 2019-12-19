@@ -35,10 +35,10 @@ const Subscription = {
 };
 
 const Query = {
-  articles: (parent, args, { mongodb }) =>
-    getItems(mongodb, 'Articles', args, 'text', -1),
+  articles: (_, args, { mongodb }) =>
+    getItems(mongodb, 'Articles', args, 'text', 1),
 
-  viewer: () => ({ id: 'VIEWER_ID' }),
+  viewer: (_, __, { user }) => user,
 };
 
 const Type = {

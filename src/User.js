@@ -1,21 +1,26 @@
 import { AuthenticationError } from 'apollo-server';
+import { ObjectId } from 'mongodb';
 
-export const getUser = token => {
+export const getUserFromToken = async (mongodb, token) => {
   const parts = token.split(' ');
 
   if (parts.length === 2 && parts[0] === 'Bearer') {
     token = parts[1];
   }
 
-  if (token !== 'TOKEN') {
+  const user = await mongodb.collection('Users').findOne({ token });
+
+  user.id = ObjectId(user._id).toString();
+
+  delete user['_id'];
+
+  console.log({ user });
+
+  if (!user) {
     throw new AuthenticationError(
       'A valid token must be supplied to access this schema.'
     );
   }
 
-  return {
-    id: 1,
-    username: 'janesmith',
-    admin: true,
-  };
+  return user;
 };

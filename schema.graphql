@@ -195,7 +195,7 @@ type Query {
   """
   Lookup current viewer.
   """
-  viewer: Viewer
+  viewer: User
 }
 
 """
@@ -206,6 +206,26 @@ type Subscription {
   Emits an Article object whenver a new article is added.
   """
   articleAdded: Article!
+}
+
+"""
+A user object.
+"""
+type User {
+  """
+  A unique identifier for an article.
+  """
+  id: ID!
+
+  """
+  The user's username.
+  """
+  username: String!
+
+  """
+  The user's name.
+  """
+  name: String!
 }
 
 """
