@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 import resolvers from './Resolvers';
 import { getUserFromToken } from './User';
+import { Users } from './DataSources';
+
+console.log(Users);
 
 dotenv.config();
 
@@ -22,14 +25,14 @@ const start = async () => {
     ${fs.readFileSync(__dirname.concat('/../schema.graphql'), 'utf8')}
   `;
 
+  const db = await mongodb;
+
   const server = new ApolloServer({
     typeDefs,
     resolvers,
     introspection: true,
     context: async context => {
       let user;
-
-      const db = await mongodb;
 
       // `req` not present on WebSocket connections
       //
@@ -61,6 +64,9 @@ const start = async () => {
       onConnect: () => console.log('subscription: onConnect'),
       onDisconnect: () => console.log('subscription: onDisconnect'),
     },
+    dataSources: () => ({
+      Users: new Users(db.collection('Users')),
+    }),
   });
 
   server.listen(4001).then(({ url }) => {

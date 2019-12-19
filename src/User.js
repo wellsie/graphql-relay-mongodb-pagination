@@ -14,8 +14,6 @@ export const getUserFromToken = async (mongodb, token) => {
 
   delete user['_id'];
 
-  console.log({ user });
-
   if (!user) {
     throw new AuthenticationError(
       'A valid token must be supplied to access this schema.'

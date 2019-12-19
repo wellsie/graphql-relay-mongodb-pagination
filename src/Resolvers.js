@@ -44,6 +44,8 @@ const Query = {
 const Type = {
   Article: {
     id: parent => parent._id.toString(),
+    createdBy: (parent, _, { dataSources }) =>
+      dataSources.Users.getUser(parent.createdBy),
   },
 
   ArticleConnection: {
@@ -67,6 +69,10 @@ const Type = {
     __resolveType() {
       return null;
     },
+  },
+
+  User: {
+    id: parent => parent.id || parent._id,
   },
 };
 

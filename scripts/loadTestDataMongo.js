@@ -31,9 +31,7 @@ const main = async () => {
 
   // indexes
   //
-  await mongodb
-    .collection('Articles')
-    .createIndex({ text: 1 }, { unique: true });
+  await mongodb.collection('Articles').createIndex({ text: 1 });
 
   await mongodb.collection('Users').createIndex({ token: 1 }, { unique: true });
 

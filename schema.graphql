@@ -6,6 +6,11 @@ input AddArticleInput {
   The text of an article.
   """
   text: String!
+
+  """
+  The author of the article.
+  """
+  createdBy: ID!
 }
 
 """
@@ -31,6 +36,11 @@ type Article implements Node {
   The text of an article.
   """
   text: String!
+
+  """
+  The author of the article.
+  """
+  createdBy: User!
 
   """
   Identifies the date and time when the object was created.

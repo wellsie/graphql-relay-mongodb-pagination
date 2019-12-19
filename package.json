@@ -21,6 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "apollo-datasource-mongodb": "^0.2.1",
     "apollo-server": "^2.9.12",
     "base64-url": "^2.3.2",
     "dotenv": "^8.2.0",
@@ -35,6 +36,7 @@
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "apollo-boost": "^0.4.4",
     "babel-eslint": "^10.0.3",
