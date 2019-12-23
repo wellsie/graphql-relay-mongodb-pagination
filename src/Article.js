@@ -80,8 +80,6 @@ export const articlesForUser = async (
     endCursor,
   };
 
-  // console.log({ pageInfo });
-
   return {
     items,
     pageInfo,
