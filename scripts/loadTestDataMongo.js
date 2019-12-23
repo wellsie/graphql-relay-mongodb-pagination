@@ -41,14 +41,13 @@ const main = async () => {
 
   // articles
   //
-
   const items = [];
 
-  for (let i = 1; i <= 1000; i++) {
+  for (let i = 1; i <= 20; i++) {
     const date = new Date();
     const userIndex = getRandomInt(2);
     items.push({
-      text: casual.sentence,
+      text: `${i} - ${casual.sentence}`,
       createdBy: insertedIds[userIndex],
       createdAt: date,
       updatedAt: date,

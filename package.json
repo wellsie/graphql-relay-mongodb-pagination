@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node ./build/server.js",
     "start:dev": "nodemon --exec babel-node ./src/server.js",
-    "lint": "eslint . && prettier -l **/*",
+    "lint": "eslint src/ && prettier -l **/*",
     "load:mongo": "babel-node ./scripts/loadTestDataMongo.js",
     "load:apollo-client": "babel-node ./scripts/loadTestDataApolloClient.js",
     "client:graphql-request": "babel-node ./scripts/clients/graphql-request.js",

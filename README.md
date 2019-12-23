@@ -87,6 +87,58 @@ query Last {
 }
 ```
 
+## Articles For Viewer
+
+```graphql
+{
+  viewer {
+    id
+    username
+    articles(last: 2) {
+      nodes {
+        id
+        text
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "viewer": {
+      "id": "5e00fcad8700880af081ab7b",
+      "username": "janesmith",
+      "articles": {
+        "nodes": [
+          {
+            "id": "5e00fcad8700880af081ab8f",
+            "text": "19 - Corporis voluptates magnam inventore sunt non itaque molestias."
+          },
+          {
+            "id": "5e00fcad8700880af081ab90",
+            "text": "20 - Sed harum nostrum nobis dolorum nesciunt."
+          }
+        ],
+        "pageInfo": {
+          "startCursor": "NWUwMGZjYWQ4NzAwODgwYWYwODFhYjhm",
+          "endCursor": "NWUwMGZjYWQ4NzAwODgwYWYwODFhYjkw",
+          "hasNextPage": false,
+          "hasPreviousPage": true
+        }
+      }
+    }
+  }
+}
+```
+
 ## Mutations
 
 This repository contains an example of calling a mutation with the [graphql-request](https://github.com/prisma-labs/graphql-request)

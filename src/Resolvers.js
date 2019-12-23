@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import GraphQLCursorType from './Cursor';
 import GraphQLDateTimeType from './DateTime';
-import { addArticle } from './Article';
+import { addArticle, articlesForUser } from './Article';
 import { getItems } from './Items';
 import { storeUpload } from './upload';
 
@@ -73,6 +73,8 @@ const Type = {
 
   User: {
     id: parent => parent.id || parent._id,
+    articles: (parent, args, { mongodb }) =>
+      articlesForUser(mongodb, parent.id, args),
   },
 };
 
