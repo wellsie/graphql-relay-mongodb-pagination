@@ -47,12 +47,12 @@ function limitQueryWithId(query, before, after, order) {
 
   if (before) {
     const op = order === 1 ? '$lt' : '$gt';
-    filter._id[op] = ObjectId(before.value);
+    filter._id[op] = ObjectId(before);
   }
 
   if (after) {
     const op = order === 1 ? '$gt' : '$lt';
-    filter._id[op] = ObjectId(after.value);
+    filter._id[op] = ObjectId(after);
   }
 
   return query.find(filter).sort([['_id', order]]);
