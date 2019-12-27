@@ -28,6 +28,7 @@ const start = async () => {
   const db = await mongodb;
 
   const server = new ApolloServer({
+    cors: { credentials: true, origin: '*' },
     typeDefs,
     resolvers,
     introspection: true,
