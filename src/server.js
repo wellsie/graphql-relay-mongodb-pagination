@@ -6,8 +6,6 @@ import resolvers from './Resolvers';
 import { getUserFromToken } from './User';
 import { Users } from './DataSources';
 
-console.log(Users);
-
 dotenv.config();
 
 const mongodbUri = process.env.MONGODB_URI;
